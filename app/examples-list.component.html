@@ -2,7 +2,7 @@
     <template let-item="item">
        <StackLayout>
             <Label [text]="item.title" class="list-group-item-heading"></Label>
-            <ZoeStr titles="Other title"></ZoeStr>
+            <ZoeStr titles="{{item.rating}}" ratingValue="{{item.rating}}"></ZoeStr>
        </StackLayout>
            
         
