@@ -1,4 +1,4 @@
-<ListView [items]="items" >
+<!--<ListView [items]="items" >
     <template let-item="item">
        <StackLayout>
             <Label [text]="item.title" class="list-group-item-heading"></Label>
@@ -7,4 +7,13 @@
            
         
     </template>
-</ListView>
+</ListView>-->
+
+<ScrollView>
+    <StackLayout>
+        <StackLayout *ngFor="let item of items">
+              <Label [text]="item.title" class="list-group-item-heading"></Label>
+            <ZoeStr titles="{{item.rating}}" ratingValue="{{item.rating}}"></ZoeStr>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>
