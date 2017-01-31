@@ -3,10 +3,12 @@
     width="{{wrapperWidth}}"
     style.backgroundColor="lightgray"
     >
-    <Label *ngFor="let ratingItem of rating; let i = index" 
-    class="text-center"
+    <!--<Label *ngFor="let ratingItem of rating; let i = index" -->
+    <Label *ngFor="let ratingItem of rating" 
+    
+    class="text-center {{iconClass}}"
     width="{{itemWidth}}"
-    text="{{ratingValue>i?fullIcon:emptyIcon}}" 
+    text="{{ratingItem.icon}}" 
  
      >
     </Label>

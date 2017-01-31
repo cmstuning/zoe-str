@@ -19,7 +19,8 @@ refer to http://docs.nativescript.org/ui/theme.
 */
 @import 'nativescript-theme-core/css/core.light.css';
 
-.ico {
-   font-family: Ionicons, ionicons; /*android uses actual file name*/
+.star-icon {
+   /*font-family: Ionicons, ionicons; android uses actual file name*/
+   font-family: FontAwesome, fontawesome-webfont;
    font-size: 20;
 }

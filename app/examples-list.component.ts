@@ -12,8 +12,8 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
 export class ExamplesListComponent {
     items = [
         { title: 'item 1', rating: 3.5 },
-        { title: 'item 2', rating: 2 },
-         { title: 'item 3', rating: 1.3 },
+        { title: 'item 2', rating: 2.6789 },
+         { title: 'item 3', rating: 3.3 },
         { title: 'item 4', rating: 5 },
 
     ];
