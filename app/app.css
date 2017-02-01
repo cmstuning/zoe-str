@@ -22,5 +22,6 @@ refer to http://docs.nativescript.org/ui/theme.
 .star-icon {
    /*font-family: Ionicons, ionicons; android uses actual file name*/
    font-family: FontAwesome, fontawesome-webfont;
-   font-size: 20;
+   font-size: 25;
 }
+.star-icon-active {color:gold;}

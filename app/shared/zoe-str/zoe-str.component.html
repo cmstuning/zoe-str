@@ -1,12 +1,14 @@
 <StackLayout orientation="horizontal" 
     (touch)="onTouch($event)" 
     width="{{wrapperWidth}}"
-    style.backgroundColor="lightgray"
+    
+    class = "{{iconClass}}"
     >
     <!--<Label *ngFor="let ratingItem of rating; let i = index" -->
     <Label *ngFor="let ratingItem of rating" 
     
-    class="text-center {{iconClass}}"
+    class="text-center {{ratingItem.class}}"
+    
     width="{{itemWidth}}"
     text="{{ratingItem.icon}}" 
  
@@ -15,4 +17,3 @@
 
     
     </StackLayout>
-    <Label text="{{titles}}" textWrap="true"></Label>

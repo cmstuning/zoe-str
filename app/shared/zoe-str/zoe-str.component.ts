@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { TouchGestureEventData } from "ui/gestures";
 
 @Component({
@@ -9,7 +9,17 @@ import { TouchGestureEventData } from "ui/gestures";
 export class ZoeStrComponent implements OnInit {
 
 @Input()
-    iconClass = "star-icon";
+iconClass = "star-icon";
+
+    @Input()
+    calb = this.onVoteRegistered();
+
+    onVoteRegistered() {
+        console.log(this.userRatingValue);
+}    
+    
+@Input()
+    iconActiveClass:string = "star-icon-active"
 
     @Input()
     fullIcon = "";
@@ -20,87 +30,94 @@ export class ZoeStrComponent implements OnInit {
     @Input()
     halfIcon = '';
 
-    @Input()
-    readonly: boolean;
+    // @Input()
+    // readonly: boolean = false;
 
-    @Input()
-    disabled: boolean;
- @Input()
- titles: string = 'test bla bla';
+    // @Input()
+    // disabled: boolean = false;
 
- @Input()
- ratingValue: number = 0;   
 
  @Input()
- starsCount: number = 5;   
+    ratingValue: number = 0;  
+    
+ @Input()   
+userRatingValue: number = 0;   
+
  @Input()
- itemWidth: number = 20;    
+ starsCount: number = 5;  
+    
+ @Input()
+ itemWidth: number = 30;   
+
+  @Input()
+ correlationPoint: number = 0.6;  
+
+     @Output()
+    onUp = new EventEmitter();
 
 
  public wrapperWidth: number;   
  public icon: string; 
- public userRatingValue: number = 0;
+ 
 
     constructor() { 
-        this.wrapperWidth = this.starsCount * this.itemWidth;
+        
     }
-   
-
-
+    private ratingChanged: boolean = false;
 
     ngOnInit() { 
+        this.wrapperWidth = this.starsCount * this.itemWidth;
         this.buildRating();
     }
     rating: any[];
 
-    
-    getRating() {
-        return this.rating;
-}
-    public buildRating() {
-        let value = this.userRatingValue === 0 ? this.ratingValue : this.userRatingValue;
+    private buildRating() {
+        let value = this.ratingChanged ? this.userRatingValue:this.ratingValue;
          this.rating = []; //init on each call
-        // this.rating.length = 0; //init on each call
-      
-        
-        
+       
         for (let i = 1; i <= this.starsCount; i++) {
             
             let ico = value >= i ? this.fullIcon : Math.round(value)>i-1?this.halfIcon:this.emptyIcon;
        
             this.rating.push({
                 icon: ico,
-            class: '',
+            class: ico!==this.emptyIcon?this.iconActiveClass:'',
 
             });
         }
         return this.rating;
       
     }
-    private setIcon(percentage) {
-    
-}    
 
     onTouch(args: TouchGestureEventData) {
+        this.ratingChanged = true;   
+        
         switch (args.action) {
             case 'up':
+                this.onUp.emit(this.userRatingValue);
+                
                 // for this case we'll send the value to api
                 // this.titles = args.getX().toString();   
                 break;
             default:
-                // let percent = this.wrapperWidth / 100 * args.getX();
-                // let rating = this.starsCount / 100 * percent;
-                this.userRatingValue = this.starsCount / 100 * (this.wrapperWidth / 100 * args.getX())+0.5;
+                
+                let percent = args.getX() * 100 / this.wrapperWidth;
+                //  remove values emmited if drag outside the container
+                percent = percent > 100 ? 100 : (percent < 0) ? 0 : percent;
+                // add correlation point to any rating to get more natural feel on tap and scroll
+                let rating = (this.starsCount / 100 * percent) + this.correlationPoint;
+                
+                // also remove the correlation which goes outside the range
+                this.userRatingValue = (rating > this.starsCount) ? this.starsCount:rating===this.correlationPoint?0:rating;
+
+                
                 this.buildRating();
                 
+                // console.log(`${percent} ${rating}`);
              
                 
-                 this.titles = this.userRatingValue.toString();
         }
- 
-        // console.log("Touch action (up, down, cancel or move)" + args.action);
-        // console.log("Touch point: [" + args.getX() + ", " + args.view.getMeasuredWidth() + "]");
-        // console.log("activePointers: " + args.getActivePointers().length);
+
    
     }
 

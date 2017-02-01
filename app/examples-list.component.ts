@@ -20,6 +20,10 @@ export class ExamplesListComponent {
 
     constructor() {
        
-        }
+    }
+    
+    public logRating(val) {
+        console.log(val);
+    }
     
 }
