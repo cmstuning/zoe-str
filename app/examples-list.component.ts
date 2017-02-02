@@ -11,10 +11,10 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
 
 export class ExamplesListComponent {
     items = [
-        { title: 'item 1', rating: 3.5 },
-        { title: 'item 2', rating: 2.6789 },
-         { title: 'item 3', rating: 3.3 },
-        { title: 'item 4', rating: 5 },
+        { title: 'item 1', rating: 3.5, id:10 },
+        { title: 'item 2', rating: 2.6789, id:20 },
+         { title: 'item 3', rating: 3.3, id:30 },
+        { title: 'item 4', rating: 50, id:40 },
 
     ];
 
@@ -22,8 +22,8 @@ export class ExamplesListComponent {
        
     }
     
-    public logRating(val) {
-        console.log(val);
+    public logRating(val, item) {
+        console.log(`${val} ${item.id}`);
     }
     
 }

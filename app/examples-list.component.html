@@ -13,7 +13,7 @@
     <StackLayout>
         <StackLayout *ngFor="let item of items">
               <Label [text]="item.title" class="list-group-item-heading"></Label>
-            <ZoeStr ratingValue="{{item.rating}}" (onUp)="logRating($event)"></ZoeStr>
+            <ZoeStr ratingValue="{{item.rating}}" (onUp)="logRating($event, item)" align="right"></ZoeStr>
         </StackLayout>
     </StackLayout>
 </ScrollView>
